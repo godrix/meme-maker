@@ -1,19 +1,30 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useEffect} from 'react';
+import {Anton_400Regular, useFonts} from '@expo-google-fonts/anton';
+import * as SplashScreen from 'expo-splash-screen';
+import Routes from './src/routes';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+const App: React.FC = () => {
+  
+  const [fontsLoaded] = useFonts({
+    Anton_400Regular
+  })
+
+  useEffect(()=>{
+    (async ()=>{
+      await SplashScreen.preventAutoHideAsync();
+
+      if(fontsLoaded){
+        await SplashScreen.hideAsync();
+      }
+    })();
+
+   
+  },[fontsLoaded])
+
+  if(!fontsLoaded){
+    return <></>
+  }
+  return <Routes />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
