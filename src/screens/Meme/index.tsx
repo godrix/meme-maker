@@ -94,7 +94,7 @@ const Meme: React.FC = () => {
     (<Button 
       label="make a meme" 
       onPress={handleSubmit} 
-      icon="home"
+      icon="plus-circle"
       load={load}
       />)
     }
